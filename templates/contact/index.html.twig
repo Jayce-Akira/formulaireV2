@@ -4,12 +4,28 @@
 
 {% block body %}
 <h1 id="titre" >Formulaire de Contact</h1>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+{# Afficher les messages de succès #}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{# Afficher les messages d'avertissement #}
+{% for message in app.flashes('warning') %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+
+
+{{ form_start(contactForm) }}
+    {{ form_row(contactForm.firstname) }}
+    {{ form_row(contactForm.lastname) }}
+    {{ form_row(contactForm.email) }}
+    {{ form_row(contactForm.comment) }}
+<div class="d-flex justify-content-center">
+    {{ form_row(contactForm.envoyer) }}
 </div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
+{{ form_end(contactForm) }}
 {% endblock %}
